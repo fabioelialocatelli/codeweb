@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Stellar Console</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script language="javascript"
+        src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
+        <style type="text/css">
+            #console {
+                background-color: wheat;
+                width: 20em;
+                padding: 0.35em;
+                margin: auto;
+            }
+            * {
+                font-family: sans-serif;
+            }
+            body {
+                background: cornflowerblue;
+            }
+            input{
+                margin: 0.15em;
+                border-radius: 0.25em;
+                border-style: solid;
+                box-shadow: 0.2em 0.2em 0.1em cornflowerblue;
+            }
+            label{
+                display: block;
+                font-size: 10pt;
+            }
+        </style>
+        <script language="javascript">
+
+            function lookupStar() {
+                //var stellarDatabase = null;
+                var stellarDenomination = $F('stellarDenomination');
+
+                new Ajax.Request('modules/database.php',
+                        {
+                            method: 'post',
+                            asynchronous: true,
+                            parameters: 'stellarDenomination=' + stellarDenomination,
+                            onSuccess: displayData
+                        }
+                );
+
+                /*new Ajax.Request('modules/database.php',
+                 {
+                 method: 'post',
+                 asynchronous: true,
+                 parameters: 'stellarDenomination=' + stellarDenomination +
+                 '&database=' + stellarDatabase,
+                 onSuccess: displayData
+                 }
+                 );*/
+            }
+
+            function displayData(parameters) {
+                var stellarData = eval("(" + parameters.responseText + ")");
+                if (stellarData) {
+                    $('designation').value = stellarData[1];
+                    $('identifierHD').value = stellarData[2];
+                    $('identifierHIP').value = stellarData[3];
+                    $('identifierSAO').value = stellarData[4];
+                    $('radialVelocity').value = stellarData[5];
+                    $('parallax').value = stellarData[6];
+                    $('parsecs').value = stellarData[7];
+                    $('lightYears').value = stellarData[8];
+                    $('apparentMagnitude').value = stellarData[9];
+                    $('absoluteMagnitude').value = stellarData[10];
+                    $('bolometricMagnitude').value = stellarData[11];
+                    $('solarDiameter').value = stellarData[12];
+                    $('absoluteLuminosity').value = stellarData[13];
+                    $('bolometricLuminosity').value = stellarData[14];
+                    $('innerBoundary').value = stellarData[15];
+                    $('outerBoundary').value = stellarData[16];
+                    $('gregorianYear').value = stellarData[17];
+                    $('spectralClass').value = stellarData[18];
+                    $('stellarCategory').value = stellarData[19];
+                } else {
+                    $('console').reset();
+                }
+            }
+        </script>        
+    </head>
+    <body>
+        <form id="console" method="post">
+            <label><input type="text" id="stellarDenomination"/> Stellar Denomination</label>
+            <label><input type="text" id="designation"/> Stellar Designation</label>
+            <label><input type="text" id="identifierHD"/> Identifier HD</label>
+            <label><input type="text" id="identifierHIP"/> Identifier HIP</label>
+            <label><input type="text" id="identifierSAO"/> Identifier SAO</label>
+            <label><input type="text" id="radialVelocity"/> Radial Velocity</label>
+            <label><input type="text" id="parallax"/></label>
+            <label><input type="text" id="parsecs"/></label>
+            <label><input type="text" id="lightYears"/></label>
+            <label><input type="text" id="apparentMagnitude"/></label>
+            <label><input type="text" id="absoluteMagnitude"/></label>
+            <label><input type="text" id="bolometricMagnitude"/></label>
+            <label><input type="text" id="solarDiameter"/></label>
+            <label><input type="text" id="absoluteLuminosity"/></label>
+            <label><input type="text" id="bolometricLuminosity"/></label>
+            <label><input type="text" id="innerBoundary"/></label>
+            <label><input type="text" id="outerBoundary"/></label>
+            <label><input type="text" id="gregorianYear"/></label>
+            <label><input type="text" id="spectralClass"/></label>
+            <label><input type="text" id="stellarCategory"/></label>
+            <!--
+            <label><input type="radio" name="databaseSelector" id="radioBayer"/>Bayer Stellar Database</label>
+            <label><input type="radio" name="databaseSelector" id="radioFlamsteed" value=""/>Flamsteed Stellar Database</label>
+            -->
+
+        </form>
+        <script>
+            $('stellarDenomination').observe('blur', lookupStar);
+        </script>
+    </body>
+</html>
