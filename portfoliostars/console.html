@@ -9,8 +9,6 @@ and open the template in the editor.
         <title>Stellar Console</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script language="javascript"
-        src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
         <style type="text/css">
             #console {
                 background-color: wheat;
@@ -35,13 +33,12 @@ and open the template in the editor.
                 font-size: 10pt;
             }
         </style>
-        <script language="javascript">
+        <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
+        <script>
 
             function lookupStar() {
-                //var stellarDatabase = null;
                 var stellarDenomination = $F('stellarDenomination');
-
-                new Ajax.Request('modules/database.php',
+                new Ajax.Request('databaseConnection.php',
                         {
                             method: 'post',
                             asynchronous: true,
@@ -49,16 +46,6 @@ and open the template in the editor.
                             onSuccess: displayData
                         }
                 );
-
-                /*new Ajax.Request('modules/database.php',
-                 {
-                 method: 'post',
-                 asynchronous: true,
-                 parameters: 'stellarDenomination=' + stellarDenomination +
-                 '&database=' + stellarDatabase,
-                 onSuccess: displayData
-                 }
-                 );*/
             }
 
             function displayData(parameters) {
@@ -69,53 +56,19 @@ and open the template in the editor.
                     $('identifierHIP').value = stellarData[3];
                     $('identifierSAO').value = stellarData[4];
                     $('radialVelocity').value = stellarData[5];
-                    $('parallax').value = stellarData[6];
-                    $('parsecs').value = stellarData[7];
-                    $('lightYears').value = stellarData[8];
-                    $('apparentMagnitude').value = stellarData[9];
-                    $('absoluteMagnitude').value = stellarData[10];
-                    $('bolometricMagnitude').value = stellarData[11];
-                    $('solarDiameter').value = stellarData[12];
-                    $('absoluteLuminosity').value = stellarData[13];
-                    $('bolometricLuminosity').value = stellarData[14];
-                    $('innerBoundary').value = stellarData[15];
-                    $('outerBoundary').value = stellarData[16];
-                    $('gregorianYear').value = stellarData[17];
-                    $('spectralClass').value = stellarData[18];
-                    $('stellarCategory').value = stellarData[19];
                 } else {
                     $('console').reset();
                 }
             }
-        </script>        
+        </script>
     </head>
     <body>
         <form id="console" method="post">
             <label><input type="text" id="stellarDenomination"/> Stellar Denomination</label>
             <label><input type="text" id="designation"/> Stellar Designation</label>
-            <label><input type="text" id="identifierHD"/> Identifier HD</label>
-            <label><input type="text" id="identifierHIP"/> Identifier HIP</label>
-            <label><input type="text" id="identifierSAO"/> Identifier SAO</label>
-            <label><input type="text" id="radialVelocity"/> Radial Velocity</label>
-            <label><input type="text" id="parallax"/></label>
-            <label><input type="text" id="parsecs"/></label>
-            <label><input type="text" id="lightYears"/></label>
-            <label><input type="text" id="apparentMagnitude"/></label>
-            <label><input type="text" id="absoluteMagnitude"/></label>
-            <label><input type="text" id="bolometricMagnitude"/></label>
-            <label><input type="text" id="solarDiameter"/></label>
-            <label><input type="text" id="absoluteLuminosity"/></label>
-            <label><input type="text" id="bolometricLuminosity"/></label>
-            <label><input type="text" id="innerBoundary"/></label>
-            <label><input type="text" id="outerBoundary"/></label>
-            <label><input type="text" id="gregorianYear"/></label>
-            <label><input type="text" id="spectralClass"/></label>
-            <label><input type="text" id="stellarCategory"/></label>
-            <!--
-            <label><input type="radio" name="databaseSelector" id="radioBayer"/>Bayer Stellar Database</label>
-            <label><input type="radio" name="databaseSelector" id="radioFlamsteed" value=""/>Flamsteed Stellar Database</label>
-            -->
-
+            <label><input type="text" id="solarDiameter"/> Solar Diameter</label>
+            <label><input type="text" id="absoluteLuminosity"/> Absolute Luminosity</label>
+            <label><input type="text" id="bolometricLuminosity"/> Bolometric Luminosity</label>
         </form>
         <script>
             $('stellarDenomination').observe('blur', lookupStar);
