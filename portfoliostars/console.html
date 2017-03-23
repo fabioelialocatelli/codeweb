@@ -7,71 +7,87 @@ and open the template in the editor.
 <html>
     <head>
         <title>Stellar Console</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style type="text/css">
-            #console {
-                background-color: wheat;
-                width: 20em;
-                padding: 0.35em;
-                margin: auto;
-            }
-            * {
-                font-family: sans-serif;
-            }
-            body {
-                background: cornflowerblue;
-            }
-            input{
-                margin: 0.15em;
-                border-radius: 0.25em;
-                border-style: solid;
-                box-shadow: 0.2em 0.2em 0.1em cornflowerblue;
-            }
-            label{
-                display: block;
-                font-size: 10pt;
-            }
-        </style>
-        <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
-        <script>
+        <link rel=StyleSheet href="theme.css" type="text/css">
+        <script language="javascript" src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script language="javascript" type="text/javascript">
 
-            function lookupStar() {
-                var stellarDenomination = $F('stellarDenomination');
-                new Ajax.Request('databaseConnection.php',
-                        {
-                            method: 'post',
-                            asynchronous: true,
-                            parameters: 'stellarDenomination=' + stellarDenomination,
-                            onSuccess: displayData
-                        }
-                );
-            }
+            $(document).ready(function () {
 
-            function displayData(parameters) {
-                var stellarData = eval("(" + parameters.responseText + ")");
-                if (stellarData) {
-                    $('designation').value = stellarData[1];
-                    $('identifierHD').value = stellarData[2];
-                    $('identifierHIP').value = stellarData[3];
-                    $('identifierSAO').value = stellarData[4];
-                    $('radialVelocity').value = stellarData[5];
-                } else {
-                    $('console').reset();
-                }
-            }
+                var starData = function (selectedStar) {
+                    $('#starContainer').empty();
+                    $.get('star.php', {'selectedStar': selectedStar}, function (data) {
+                        alert(data);
+                        $('#starContainer').html(data);
+                    });
+                };
+
+                var constellationData = function (selectedConstellation) {
+                    $('#constellationContainer').empty();
+                    $.get('constellation.php', {'selectedConstellation': selectedConstellation}, function (data) {
+                        $('#constellationContainer').html(data);
+                    });
+                    
+                    $('table td:nth-child(1)').each(function () {
+                        $(this).click(function () {
+                            alert($(this).text());
+                            starData($(this).text());
+                        }).addClass('pointer');
+                    });
+
+                    $('tbody tr:even').removeClass('odd').addClass('even');
+                    $('tbody tr:odd').removeClass('even').addClass('odd');
+                    $('table thead th').addClass('header');
+
+                    $('table').each(function () {
+                        var constellation = $(this);
+                        $('thead th', constellation).each(function (dataField) {
+
+                            var header = $(this);
+                            if (header.is('.header')) {
+                                header.addClass('clickable').hover(function () {
+                                    header.addClass('hover');
+                                }, function () {
+                                    header.removeClass('hover');
+                                });
+
+                                header.click(function () {
+                                    var dataSets = constellation.find('tbody > tr').get();
+                                    
+                                    dataSets.sort(function (a, b) {
+                                        var claveA = $(a).children('td').eq(dataField).text().toUpperCase();
+                                        var claveB = $(b).children('td').eq(dataField).text().toUpperCase();
+                                        if (claveA < claveB)
+                                            return -1;
+                                        if (claveA > claveB)
+                                            return 1;
+                                        return 0;
+                                        
+                                    });
+
+                                    $.each(dataSets, function (index, dataSet) {
+                                        constellation.children('tbody').append(dataSet);
+                                    });
+
+                                    constellation.find('td').removeClass('orderedConstellation');
+                                    constellation.find('td').filter(':nth-child(' + (dataField + 1) + ')').addClass('orderedConstellation');
+
+                                });
+                            }
+                        });
+                    });
+                };  
+                
+                constellationData("Draconis");
+                starData("Giausar");
+                
+            });
         </script>
     </head>
+
     <body>
-        <form id="console" method="post">
-            <label><input type="text" id="stellarDenomination"/> Stellar Denomination</label>
-            <label><input type="text" id="designation"/> Stellar Designation</label>
-            <label><input type="text" id="solarDiameter"/> Solar Diameter</label>
-            <label><input type="text" id="absoluteLuminosity"/> Absolute Luminosity</label>
-            <label><input type="text" id="bolometricLuminosity"/> Bolometric Luminosity</label>
-        </form>
-        <script>
-            $('stellarDenomination').observe('blur', lookupStar);
-        </script>
+        <div id="mainContainer">
+            <div id="constellationContainer"></div>
+            <div id="starContainer"></div>
+        </div>
     </body>
 </html>

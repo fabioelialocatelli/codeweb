@@ -1,0 +1,62 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23/03/2017, 5:20:51 PM
+    Author     : Fabio Elia Locatelli
+*/
+* {    
+    font-family: sans-serif;
+    /*color: wheat;*/
+}
+body {
+    background-color: cornflowerblue;
+}
+th {
+    color: darkslategrey;
+    text-align: center;    
+}
+table {
+    width: 70em;
+    margin: auto;
+    table-layout: fixed;
+}
+#mainContainer {
+    width: 75em;
+    background-color: wheat;
+    margin: auto;
+    padding: 0.25em;
+}
+#constellationContainer {
+    padding: 0.5em;
+}
+#starContainer {
+    width: 70em;
+    margin: auto;
+    background-color: darkslategrey;
+}
+.odd {
+    background-color: grey;  
+}
+.even {
+    background-color: darkslategrey;
+}
+.header {
+    background-color: darkslateblue;
+}
+.hover {
+    background-color: gold;
+}
+.clickable {
+    color: whitesmoke;
+}
+.pointer {
+    cursor: pointer;
+}
+.orderedConstellation {
+    background-color: darkslateblue;
+    color: whitesmoke;
+}
+
