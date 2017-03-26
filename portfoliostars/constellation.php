@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 header('Content-type: text/html; charset=utf8');
+require_once("jsonServices.php");
 
 $databaseConnection = mysqli_connect("localhost", "root", "", "bayer");
 mysqli_set_charset($databaseConnection, "utf8");
@@ -14,28 +15,20 @@ WHERE
 
 $databaseQuery = mysqli_query($databaseConnection, $selectedConstellation);
 
-echo "<table>";
-echo "<thead>";
-echo "<tr>";
-echo "<th>Denomination</th>";
-echo "<th>Designation</th>";
-echo "<th>Solar Diameter</th>";
-echo "<th>Absolute Luminosity</th>";
-echo "<th>Bolometric Luminosity</th>";
-echo "</tr>";
-echo "</thead>";
-echo "<tbody>";
+if (mysqli_affected_rows($databaseConnection) > 0) {
 
-while ($recordSet = mysqli_fetch_array($databaseQuery)) {
+    $stellarRecords = array();
+    while ($recordSet = mysqli_fetch_assoc($databaseQuery)) {
+        $stellarRecords[] = $recordSet;
+    }
+    $objetojson = new Services_JSON();
+    $textojson = $objetojson->encode($stellarRecords);
+    echo($textojson);
 
-    echo "<tr>";
-    echo "<td>" . ($recordSet[0]) . "</td>";
-    echo "<td>" . ($recordSet[1]) . "</td>";
-    echo "<td>" . ($recordSet[2]) . "</td>";
-    echo "<td>" . ($recordSet[3]) . "</td>";
-    echo "<td>" . ($recordSet[4]) . "</td>";
-    echo "</tr>";
-}
 
-echo "</tbody>";
-echo "</table>";
+    //$vararray = mysqli_fetch_assoc($databaseQuery);
+    //$objetojson = new Services_JSON();
+    //$textojson = $objetojson->encode($vararray);
+    //echo($textojson);
+} else
+    echo('false');
