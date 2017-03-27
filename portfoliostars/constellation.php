@@ -18,17 +18,14 @@ $databaseQuery = mysqli_query($databaseConnection, $selectedConstellation);
 if (mysqli_affected_rows($databaseConnection) > 0) {
 
     $stellarRecords = array();
+
     while ($recordSet = mysqli_fetch_assoc($databaseQuery)) {
         $stellarRecords[] = $recordSet;
     }
-    $objetojson = new Services_JSON();
-    $textojson = $objetojson->encode($stellarRecords);
-    echo($textojson);
 
-
-    //$vararray = mysqli_fetch_assoc($databaseQuery);
-    //$objetojson = new Services_JSON();
-    //$textojson = $objetojson->encode($vararray);
-    //echo($textojson);
-} else
+    $JSON = new Services_JSON();
+    $stellarData = $JSON->encode($stellarRecords);
+    echo($stellarData);
+} else {
     echo('false');
+}

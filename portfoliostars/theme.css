@@ -11,52 +11,47 @@ and open the template in the editor.
     font-family: sans-serif;
     color: wheat;
 }
-body {
-    background-color: cornflowerblue;
-}
 th {
-    color: darkslategrey;
     text-align: center;    
+}
+td {
+    text-align: left;
 }
 table {
     width: 70em;
     margin: auto;
     table-layout: fixed;
+    border: 1px solid blanchedalmond;
 }
 #mainContainer {
     width: 75em;
-    background-color: wheat;
     margin: auto;
     padding: 0.25em;
 }
-#constellationContainer {
+#constellationContainer, #starContainer {
+    width: 100%;
     padding: 0.5em;
-}
-#starContainer {
-    width: 70em;
     margin: auto;
-    background-color: darkslategrey;
 }
 .odd {
-    background-color: grey;  
+    background-color: darkcyan; 
 }
 .even {
     background-color: darkslategrey;
 }
 .header {
-    background-color: darkslateblue;
+    background-color: cadetblue;
+    font-style: italic;
+    font-size: 0.95em;
+    font-weight: normal;
 }
 .hover {
-    background-color: gold;
-}
-.clickable {
-    color: whitesmoke;
+    background-color: teal;
 }
 .pointer {
     cursor: pointer;
 }
-.orderedConstellation {
-    background-color: darkslateblue;
-    color: whitesmoke;
+.clickable, .orderedConstellation {
+    color: blanchedalmond;
 }
 
