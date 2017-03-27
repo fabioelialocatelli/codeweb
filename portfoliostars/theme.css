@@ -23,6 +23,28 @@ table {
     table-layout: fixed;
     border: 1px solid blanchedalmond;
 }
+label {
+    margin: 0.25em;
+    padding-bottom: 0.55em;
+    display: block;
+    text-align: left;
+}
+input{
+    color: darkslategrey;
+    display: block;
+    float: right;
+    clear: left;
+    margin: 0.25em;
+    border-radius:0.25em;
+    border: 1px solid darkcyan;
+}
+form{
+    margin: auto;
+    display: table;
+    padding: 0.25em;
+    background: rgba(0, 139, 139, 0.5);
+    box-shadow: 2px 2px 4px darkcyan;
+}
 #mainContainer {
     width: 75em;
     margin: auto;

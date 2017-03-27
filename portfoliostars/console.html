@@ -1,198 +1,23 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Stellar Console</title>
         <link rel=StyleSheet href="theme.css" type="text/css">
-        <script language="javascript" src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-        <script language="javascript" type="text/javascript">
-
-            $(document).ready(function () {
-
-                var starData = function (selectedStar) {
-                    $('#starContainer').empty();
-                    $.get('star.php', {'selectedStar': selectedStar}, function (data) {
-
-                        var stellarData = JSON.parse(data);
-                        var tableContent = '<table>';
-                        tableContent += "<thead>";
-                        tableContent += "<tr>";
-                        tableContent += "<th>Denomination</th>";
-                        tableContent += "<th>Designation</th>";
-                        tableContent += "<th>HD Identifier</th>";
-                        tableContent += "<th>HIP Identifier</th>";
-                        tableContent += "<th>SAO Identifier</th>";
-                        tableContent += "</tr>";
-                        tableContent += "</thead>";
-                        tableContent += "<tbody>";
-                        tableContent += '<tr>';
-
-                        $.each(stellarData, function (i, stellarParameter) {
-                            tableContent += '<td>' + stellarParameter + '</td>';
-                        });
-
-                        tableContent += '</tr>';
-                        tableContent += "</tbody>";
-                        tableContent += "</table>";
-
-                        $('#starContainer').html(tableContent);
-
-                        $('table td:nth-child(1)').each(function () {
-                            $(this).click(function () {
-                                starData($(this).text());
-                            }).addClass('pointer');
-                        });
-
-                        $('tbody tr:even').removeClass('odd').addClass('even');
-                        $('tbody tr:odd').removeClass('even').addClass('odd');
-                        $('table thead th').addClass('header');
-
-                        $('table').each(function () {
-                            var constellation = $(this);
-                            $('thead th', constellation).each(function (dataField) {
-
-                                var header = $(this);
-                                if (header.is('.header')) {
-                                    header.addClass('clickable').hover(function () {
-                                        header.addClass('hover');
-                                    }, function () {
-                                        header.removeClass('hover');
-                                    });
-
-                                    header.click(function () {
-                                        var dataSets = constellation.find('tbody > tr').get();
-
-                                        dataSets.sort(function (key_1, key_2) {
-
-                                            var keyA = $(key_1).children('td').eq(dataField).text().toUpperCase();
-                                            var keyB = $(key_2).children('td').eq(dataField).text().toUpperCase();
-
-                                            if (keyA < keyB)
-                                                return -1;
-                                            if (keyA > keyB)
-                                                return 1;
-
-                                            return 0;
-
-                                        });
-
-                                        $.each(dataSets, function (i, dataSet) {
-                                            constellation.children('tbody').append(dataSet);
-                                        });
-
-                                        constellation.find('td').removeClass('orderedConstellation');
-                                        constellation.find('td').filter(':nth-child(' + (dataField + 1) + ')').addClass('orderedConstellation');
-
-                                    });
-                                }
-
-                            });
-                        });
-                    });
-                };
-
-                var constellationData = function (selectedConstellation) {
-                    $('#constellationContainer').empty();
-                    $.get('constellation.php', {'selectedConstellation': selectedConstellation}, function (data) {
-
-                        var stellarData = JSON.parse(data);
-                        var tableContent = '<table>';
-                        tableContent += "<thead>";
-                        tableContent += "<tr>";
-                        tableContent += "<th>Denomination</th>";
-                        tableContent += "<th>Designation</th>";
-                        tableContent += "<th>Solar Diameter</th>";
-                        tableContent += "<th>Absolute Luminosity</th>";
-                        tableContent += "<th>Bolometric Luminosity</th>";
-                        tableContent += "</tr>";
-                        tableContent += "</thead>";
-                        tableContent += "<tbody>";
-
-                        $.each(stellarData, function (i, stellarRecord) {
-
-                            tableContent += '<tr>';
-
-                            $.each(stellarRecord, function (j, stellarAttribute) {
-                                tableContent += '<td>' + stellarAttribute + '</td>';
-                            });
-
-                            tableContent += '</tr>';
-
-                        });
-                        tableContent += "</tbody>";
-                        tableContent += "</table>";
-                        tableContent += '</table>';
-
-                        $('#constellationContainer').html(tableContent);
-
-                        $('table td:nth-child(1)').each(function () {
-                            $(this).click(function () {
-                                starData($(this).text());
-                            }).addClass('pointer');
-                        });
-
-                        $('tbody tr:even').removeClass('odd').addClass('even');
-                        $('tbody tr:odd').removeClass('even').addClass('odd');
-                        $('table thead th').addClass('header');
-
-                        $('table').each(function () {
-                            var constellation = $(this);
-                            $('thead th', constellation).each(function (dataField) {
-
-                                var header = $(this);
-                                if (header.is('.header')) {
-                                    header.addClass('clickable').hover(function () {
-                                        header.addClass('hover');
-                                    }, function () {
-                                        header.removeClass('hover');
-                                    });
-
-                                    header.click(function () {
-                                        var dataSets = constellation.find('tbody > tr').get();
-
-                                        dataSets.sort(function (key_1, key_2) {
-                                            var keyA = $(key_1).children('td').eq(dataField).text().toUpperCase();
-                                            var keyB = $(key_2).children('td').eq(dataField).text().toUpperCase();
-
-                                            if (keyA < keyB)
-                                                return -1;
-                                            if (keyA > keyB)
-                                                return 1;
-
-                                            return 0;
-
-                                        });
-
-                                        $.each(dataSets, function (i, dataSet) {
-                                            constellation.children('tbody').append(dataSet);
-                                        });
-
-                                        constellation.find('td').removeClass('orderedConstellation');
-                                        constellation.find('td').filter(':nth-child(' + (dataField + 1) + ')').addClass('orderedConstellation');
-
-                                    });
-                                }
-
-                            });
-                        });
-                    });
-                };
-
-                starData("Giausar");
-                constellationData("Orionis");
-
-            });
-        </script>
+        <script language="javascript" type="text/javascript" src="jquery.js"></script>        
+        <script language="javascript" type="text/javascript" src="modules.js"></script>
     </head>
 
     <body>
         <div id="mainContainer">
+            <div id="userControls">
+                <form method="post">
+                    <label>Query by Constellation:<input type="text" id="queryConstellation"/></label>
+                    <label>Query by Denomination:<input type="text" id="queryDenomination"/></label>
+                    <input type="button" id="queryButton" value="Submit"/>
+                </form>
+            </div>
             <div id="constellationContainer"></div>
-            <div id="starContainer"></div>
+            <div id="starContainer"></div>            
         </div>
     </body>
 </html>

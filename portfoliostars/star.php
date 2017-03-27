@@ -15,7 +15,7 @@ $selectedStar = "SELECT
 FROM
     bayer.stellarIdentifiers
 WHERE
-    denomination = '" . $_GET["selectedStar"] . "';";
+    denomination = '" . $_POST["selectedStar"] . "';";
 
 $databaseQuery = mysqli_query($databaseConnection, $selectedStar);
 

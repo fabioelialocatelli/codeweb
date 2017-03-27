@@ -11,7 +11,7 @@ $selectedConstellation = "SELECT
 FROM
     bayer.stellarParameters
 WHERE
-    designation LIKE '%" . $_GET["selectedConstellation"] . "';";
+    designation LIKE '%" . $_POST["selectedConstellation"] . "';";
 
 $databaseQuery = mysqli_query($databaseConnection, $selectedConstellation);
 
