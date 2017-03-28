@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+    var refresh = function (table) {
+        $('tbody tr:even', table).removeClass('odd').addClass('even');
+        $('tbody tr:odd', table).removeClass('even').addClass('odd');
+    };
+
     var starData = function (selectedStar) {
 
         $('#starContainer').empty();
@@ -8,7 +13,7 @@ $(document).ready(function () {
         $.post('star.php', {'selectedStar': selectedStar}, function (data) {
 
             var stellarData = JSON.parse(data);
-            var tableContent = '<table>';
+            var tableContent = "<table>";
             tableContent += "<thead>";
             tableContent += "<tr>";
             tableContent += "<th>Denomination</th>";
@@ -18,6 +23,7 @@ $(document).ready(function () {
             tableContent += "<th>SAO Identifier</th>";
             tableContent += "</tr>";
             tableContent += "</thead>";
+
             tableContent += "<tbody>";
             tableContent += '<tr>';
 
@@ -37,13 +43,15 @@ $(document).ready(function () {
                 }).addClass('pointer');
             });
 
-            $('tbody tr:even').removeClass('odd').addClass('even');
-            $('tbody tr:odd').removeClass('even').addClass('odd');
+
             $('table thead th').addClass('header');
 
             $('table').each(function () {
-                var constellation = $(this);
-                $('thead th', constellation).each(function (dataField) {
+
+                var star = $(this);
+                refresh(star);
+
+                $('thead th', star).each(function (dataField) {
 
                     var header = $(this);
                     if (header.is('.header')) {
@@ -54,7 +62,7 @@ $(document).ready(function () {
                         });
 
                         header.click(function () {
-                            var dataSets = constellation.find('tbody > tr').get();
+                            var dataSets = star.find('tbody > tr').get();
 
                             dataSets.sort(function (key_1, key_2) {
 
@@ -71,11 +79,14 @@ $(document).ready(function () {
                             });
 
                             $.each(dataSets, function (i, dataSet) {
-                                constellation.children('tbody').append(dataSet);
+                                star.children('tbody').append(dataSet);
+                                dataSet.key = null;
                             });
 
-                            constellation.find('td').removeClass('orderedConstellation');
-                            constellation.find('td').filter(':nth-child(' + (dataField + 1) + ')').addClass('orderedConstellation');
+                            star.find('td').removeClass('orderedConstellation');
+                            star.find('td').filter(':nth-child(' + (dataField + 1) + ')').addClass('orderedConstellation');
+
+                            refresh(star);
 
                         });
                     }
@@ -103,6 +114,7 @@ $(document).ready(function () {
             tableContent += "<th>Bolometric Luminosity</th>";
             tableContent += "</tr>";
             tableContent += "</thead>";
+
             tableContent += "<tbody>";
 
             $.each(stellarData, function (i, stellarRecord) {
@@ -118,7 +130,6 @@ $(document).ready(function () {
             });
             tableContent += "</tbody>";
             tableContent += "</table>";
-            tableContent += '</table>';
 
             $('#constellationContainer').html(tableContent);
 
@@ -133,7 +144,10 @@ $(document).ready(function () {
             $('table thead th').addClass('header');
 
             $('table').each(function () {
+
                 var constellation = $(this);
+                refresh(constellation);
+
                 $('thead th', constellation).each(function (dataField) {
 
                     var header = $(this);
@@ -166,6 +180,8 @@ $(document).ready(function () {
 
                             constellation.find('td').removeClass('orderedConstellation');
                             constellation.find('td').filter(':nth-child(' + (dataField + 1) + ')').addClass('orderedConstellation');
+
+                            refresh(constellation);
 
                         });
                     }

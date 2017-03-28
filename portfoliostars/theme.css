@@ -16,14 +16,16 @@ th {
 }
 td {
     text-align: left;
+    font-size: 0.85em;
 }
 table {
-    width: 70em;
+    width: 50%;
     margin: auto;
     table-layout: fixed;
     border: 1px solid blanchedalmond;
 }
 label {
+    color: blanchedalmond;
     margin: 0.25em;
     padding-bottom: 0.55em;
     display: block;
@@ -46,7 +48,7 @@ form{
     box-shadow: 2px 2px 4px darkcyan;
 }
 #mainContainer {
-    width: 75em;
+    width: 120em;
     margin: auto;
     padding: 0.25em;
 }
