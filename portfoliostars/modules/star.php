@@ -1,9 +1,10 @@
 <?php
 
 header('Content-type: text/html; charset=utf8');
-require_once("jsonServices.php");
+require_once("json.php");
 
-$databaseConnection = mysqli_connect("localhost", "root", "", "bayer");
+$credentials = simplexml_load_file('../credentials.xml');
+$databaseConnection = mysqli_connect($credentials->hostname, $credentials->username, $credentials->password, $credentials->database);
 mysqli_set_charset($databaseConnection, "utf8");
 
 $selectedStar = "SELECT 
