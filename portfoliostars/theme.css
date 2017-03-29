@@ -23,6 +23,7 @@ table {
     margin: auto;
     table-layout: fixed;
     border: 1px solid blanchedalmond;
+    box-shadow: 2px 2px 4px darkcyan;
 }
 label {
     color: blanchedalmond;
@@ -37,14 +38,15 @@ input{
     float: right;
     clear: left;
     margin: 0.25em;
-    border-radius:0.25em;
+    border-radius: 0.25em;
     border: 1px solid darkcyan;
+    box-sizing: content-box;
 }
 form{
     margin: auto;
     display: table;
     padding: 0.25em;
-    background: rgba(0, 139, 139, 0.5);
+    background-color: cadetblue;
     box-shadow: 2px 2px 4px darkcyan;
 }
 #mainContainer {
@@ -77,5 +79,8 @@ form{
 }
 .clickable, .orderedConstellation {
     color: blanchedalmond;
+}
+input[type=button]{
+    margin-right: 0.5em;
 }
 
