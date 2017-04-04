@@ -50,7 +50,7 @@ form{
     box-shadow: 2px 2px 4px darkcyan;
 }
 #mainContainer {
-    width: 120em;
+    width: 80%;
     margin: auto;
     padding: 0.25em;
 }
