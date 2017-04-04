@@ -18,8 +18,11 @@ td {
     text-align: left;
     font-size: 0.85em;
 }
+
+th, td{
+    padding: 0.15em;
+}
 table {
-    width: 50%;
     margin: auto;
     table-layout: fixed;
     border: 1px solid blanchedalmond;
@@ -68,7 +71,7 @@ form{
 .header {
     background-color: cadetblue;
     font-style: italic;
-    font-size: 0.95em;
+    font-size: 90%;
     font-weight: normal;
 }
 .hover {
