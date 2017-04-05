@@ -18,12 +18,11 @@ td {
     text-align: left;
     font-size: 0.85em;
 }
-
-th, td{
-    padding: 0.15em;
+td, th{
+    padding: 0.25em;
 }
-table {
-    margin: auto;
+table {     
+    font-size: 80%;
     table-layout: fixed;
     border: 1px solid blanchedalmond;
     box-shadow: 2px 2px 4px darkcyan;
@@ -31,29 +30,32 @@ table {
 label {
     color: blanchedalmond;
     margin: 0.25em;
-    padding-bottom: 0.55em;
+    padding-bottom: 1em;
     display: block;
     text-align: left;
+    font-size: 75%;
+    text-transform: uppercase;
 }
-input{
+input {
     color: darkslategrey;
     display: block;
     float: right;
     clear: left;
-    margin: 0.25em;
+    margin-left: 0.25em;
     border-radius: 0.25em;
     border: 1px solid darkcyan;
     box-sizing: content-box;
 }
-form{
+form, table{
     margin: auto;
+}
+form{
     display: table;
     padding: 0.25em;
     background-color: cadetblue;
     box-shadow: 2px 2px 4px darkcyan;
 }
 #mainContainer {
-    width: 80%;
     margin: auto;
     padding: 0.25em;
 }
@@ -83,7 +85,11 @@ form{
 .clickable, .orderedConstellation {
     color: blanchedalmond;
 }
-input[type=button]{
-    margin-right: 0.5em;
+input[type="button"] {
+    margin-right: 0.25em;
+    text-transform: uppercase;
+    font-size: 75%;
+    padding: 0.35em;
+    font-weight: bold;
 }
 
