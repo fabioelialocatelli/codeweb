@@ -10,7 +10,7 @@ mysqli_set_charset($databaseConnection, "utf8");
 $selectedConstellation = "SELECT 
     *
 FROM
-    bayer.stellarParameters
+    bayer.stellarConsole
 WHERE
     designation LIKE '%" . $_POST["selectedConstellation"] . "';";
 

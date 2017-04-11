@@ -8,13 +8,9 @@ $databaseConnection = mysqli_connect($credentials->hostname, $credentials->usern
 mysqli_set_charset($databaseConnection, "utf8");
 
 $selectedStar = "SELECT 
-    denomination,
-    designation,
-    identifierHD,
-    identifierHIP,
-    identifierSAO
+    *
 FROM
-    bayer.stellarIdentifiers
+    bayer.stellarConsole
 WHERE
     denomination = '" . $_POST["selectedStar"] . "';";
 

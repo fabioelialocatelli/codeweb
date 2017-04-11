@@ -16,11 +16,23 @@ $(document).ready(function () {
             var tableContent = "<table>";
             tableContent += "<thead>";
             tableContent += "<tr>";
+
             tableContent += "<th>Denomination</th>";
             tableContent += "<th>Designation</th>";
-            tableContent += "<th>HD Identifier</th>";
             tableContent += "<th>HIP Identifier</th>";
-            tableContent += "<th>SAO Identifier</th>";
+            tableContent += "<th>Light Years</th>";
+            tableContent += "<th>Radial Velocity</th>";
+            tableContent += "<th>Parallax</th>";
+            tableContent += "<th>Apparent Magnitude</th>";
+            tableContent += "<th>Absolute Magnitude</th>";
+            tableContent += "<th>Absolute Luminosity</th>";
+            tableContent += "<th>Solar Diameter</th>";
+            tableContent += "<th>Inner Boundary</th>";
+            tableContent += "<th>Outer Boundary</th>";
+            tableContent += "<th>Gregorian Year</th>";
+            tableContent += "<th>Spectral Class</th>";
+            tableContent += "<th>Stellar Category</th>";
+
             tableContent += "</tr>";
             tableContent += "</thead>";
 
@@ -51,43 +63,14 @@ $(document).ready(function () {
                 var star = $(this);
                 refresh(star);
 
-                $('thead th', star).each(function (dataField) {
+                $('thead th', star).each(function () {
 
                     var header = $(this);
                     if (header.is('.header')) {
-                        header.addClass('clickable').hover(function () {
+                        header.hover(function () {
                             header.addClass('hover');
                         }, function () {
                             header.removeClass('hover');
-                        });
-
-                        header.click(function () {
-                            var dataSets = star.find('tbody > tr').get();
-
-                            dataSets.sort(function (key_1, key_2) {
-
-                                var keyA = $(key_1).children('td').eq(dataField).text().toUpperCase();
-                                var keyB = $(key_2).children('td').eq(dataField).text().toUpperCase();
-
-                                if (keyA < keyB)
-                                    return -1;
-                                if (keyA > keyB)
-                                    return 1;
-
-                                return 0;
-
-                            });
-
-                            $.each(dataSets, function (i, dataSet) {
-                                star.children('tbody').append(dataSet);
-                                dataSet.key = null;
-                            });
-
-                            star.find('td').removeClass('orderedConstellation');
-                            star.find('td').filter(':nth-child(' + (dataField + 1) + ')').addClass('orderedConstellation');
-
-                            refresh(star);
-
                         });
                     }
 
@@ -107,11 +90,23 @@ $(document).ready(function () {
             var tableContent = '<table>';
             tableContent += "<thead>";
             tableContent += "<tr>";
+
             tableContent += "<th>Denomination</th>";
             tableContent += "<th>Designation</th>";
-            tableContent += "<th>Solar Diameter</th>";
+            tableContent += "<th>HIP Identifier</th>";
+            tableContent += "<th>Light Years</th>";
+            tableContent += "<th>Radial Velocity</th>";
+            tableContent += "<th>Parallax</th>";
+            tableContent += "<th>Apparent Magnitude</th>";
+            tableContent += "<th>Absolute Magnitude</th>";
             tableContent += "<th>Absolute Luminosity</th>";
-            tableContent += "<th>Bolometric Luminosity</th>";
+            tableContent += "<th>Solar Diameter</th>";
+            tableContent += "<th>Inner Boundary</th>";
+            tableContent += "<th>Outer Boundary</th>";
+            tableContent += "<th>Gregorian Year</th>";
+            tableContent += "<th>Spectral Class</th>";
+            tableContent += "<th>Stellar Category</th>";
+
             tableContent += "</tr>";
             tableContent += "</thead>";
 
