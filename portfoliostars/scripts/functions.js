@@ -10,7 +10,7 @@ $(document).ready(function () {
         $('#starContainer').empty();
         $('#constellationContainer').empty();
 
-        $.post('/webdev/portfoliostars/modules/star.php', {'selectedStar': selectedStar}, function (data) {
+        $.post('/github/webdev/portfoliostars/modules/star.php', {'selectedStar': selectedStar}, function (data) {
 
             var stellarData = JSON.parse(data);
             var tableContent = "<table>";
@@ -84,7 +84,7 @@ $(document).ready(function () {
         $('#starContainer').empty();
         $('#constellationContainer').empty();
 
-        $.post('/webdev/portfoliostars/modules/constellation.php', {'selectedConstellation': selectedConstellation}, function (data) {
+        $.post('/github/webdev/portfoliostars/modules/constellation.php', {'selectedConstellation': selectedConstellation}, function (data) {
 
             var stellarData = JSON.parse(data);
             var tableContent = '<table>';
